@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NovaDetail | Gallery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="gallery.css" />
+  <style>
+    /* Label styling on top-left */
+    .before-after-toggle .label {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #ffcc00cc;
+      color: #000;
+      padding: 4px 12px;
+      font-weight: 700;
+      border-radius: 12px;
+      z-index: 4;
+      user-select: none;
+      pointer-events: none;
+      font-size: 0.9rem;
+      font-family: 'Orbitron', sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <h1 class="logo">NovaDetail</h1>
+    <button class="hamburger" aria-label="Menu">&#9776;</button>
+    <nav id="primary-navigation">
+      <a href="index.html#services">Services</a>
+      <a href="index.html#about">About</a>
+      <a href="gallery.html" class="active">Gallery</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section id="gallery" class="section">
+    <h2>Gallery: Before & After</h2>
+
+    <!-- 🖼 Before/After Toggle Grid -->
+    <div class="before-after-grid">
+      <div class="before-after-toggle">
+        <span class="label">Before</span>
+        <img src="images/pexels-andreevaleksandar-25189129.jpg" alt="Before 1">
+        <img src="images/pexels-pixabay-326259.jpg" alt="After 1" class="after">
+        <button class="toggle-btn">→</button>
+      </div>
+      <div class="before-after-toggle">
+        <span class="label">Before</span>
+        <img src="images/pexels-andreevaleksandar-25189129.jpg" alt="Before 2">
+        <img src="images/pexels-pixabay-326259.jpg" alt="After 2" class="after">
+        <button class="toggle-btn">→</button>
+      </div>
+      <div class="before-after-toggle">
+        <span class="label">Before</span>
+        <img src="images/pexels-andreevaleksandar-25189129.jpg" alt="Before 3">
+        <img src="images/pexels-pixabay-326259.jpg" alt="After 3" class="after">
+        <button class="toggle-btn">→</button>
+      </div>
+      <div class="before-after-toggle">
+        <span class="label">Before</span>
+        <img src="images/pexels-andreevaleksandar-25189129.jpg" alt="Before 4">
+        <img src="images/pexels-pixabay-326259.jpg" alt="After 4" class="after">
+        <button class="toggle-btn">→</button>
+      </div>
+      <div class="before-after-toggle">
+        <span class="label">Before</span>
+        <img src="images/pexels-andreevaleksandar-25189129.jpg" alt="Before 4">
+        <img src="images/pexels-pixabay-326259.jpg" alt="After 4" class="after">
+        <button class="toggle-btn">→</button>
+      </div>
+      <div class="before-after-toggle">
+        <span class="label">Before</span>
+        <img src="images/pexels-andreevaleksandar-25189129.jpg" alt="Before 4">
+        <img src="images/pexels-pixabay-326259.jpg" alt="After 4" class="after">
+        <button class="toggle-btn">→</button>
+      </div>
+    </div>
+
+    <!-- 🧭 Auto-Scrolling Row with Pause on Hold -->
+    <div class="auto-scroll-row">
+      <div class="auto-scroll-track" id="scrollTrack">
+        <div class="scroll-card"><img src="images/pexels-garvin-st-villier-719266-9452107.jpg" alt="Scroll 1"></div>
+        <div class="scroll-card"><img src="images/pexels-zenzazione-2922142.jpg" alt="Scroll 2"></div>
+        <div class="scroll-card"><img src="images/pexels-garvin-st-villier-719266-9452107.jpg" alt="Scroll 3"></div>
+        <div class="scroll-card"><img src="images/pexels-pixabay-326259.jpg" alt="Scroll 4"></div>
+        <div class="scroll-card"><img src="images/pexels-garvin-st-villier-719266-9452107.jpg" alt="Scroll 5"></div>
+        <div class="scroll-card"><img src="images/pexels-zenzazione-2922142.jpg" alt="Scroll 6"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 NovaDetail. All rights reserved.</p>
+  </footer>
+
+  <!-- Pause scroll on hold logic + toggle label update -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Hamburger toggle for mobile nav
+    const hamburger = document.querySelector('.hamburger');
+    const nav = document.getElementById('primary-navigation');
+
+    if (hamburger && nav) {
+      hamburger.addEventListener('click', () => {
+        nav.classList.toggle('show');
+      });
+    }
+
+    // Pause scrolling row on hold
+    const track = document.getElementById('scrollTrack');
+    const pause = () => track?.classList.add('paused');
+    const resume = () => track?.classList.remove('paused');
+
+    if (track) {
+      track.addEventListener('mousedown', pause);
+      track.addEventListener('mouseup', resume);
+      track.addEventListener('mouseleave', resume);
+      track.addEventListener('touchstart', pause);
+      track.addEventListener('touchend', resume);
+    }
+
+    // Toggle after image + label text
+    document.querySelectorAll('.before-after-toggle').forEach(container => {
+      const btn = container.querySelector('.toggle-btn');
+      const label = container.querySelector('.label');
+
+      btn?.addEventListener('click', () => {
+        container.classList.toggle('active');
+        label.textContent = container.classList.contains('active') ? 'After' : 'Before';
+      });
+    });
+  });
+</script>
+</body>
+</html>
